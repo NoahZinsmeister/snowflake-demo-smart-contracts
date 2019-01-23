@@ -1,0 +1,19 @@
+{
+  "name": "snowflake-demo-smart-contracts",
+  "version": "1.0.0",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "npm run buidl",
+    "buidl": "rm -rf build/ && npx truffle compile",
+    "test": "truffle test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "truffle": "^5.0.2"
+  }
+}
