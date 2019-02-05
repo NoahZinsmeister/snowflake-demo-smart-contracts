@@ -24,20 +24,20 @@ contract DemoHelper {
     // wrap createIdentityDelegated and initialize the client raindrop resolver
     function createIdentityDelegated(
         address associatedAddress, address tokensReceivedAddress,
-        uint8[2] memory v, bytes32[2] memory r, bytes32[2] memory s, uint timestamp
+        uint8 v, bytes32 r, bytes32 s, uint timestamp
     ) public returns (uint ein) {
         // create 1484 identity
-        address[] memory _providers = new address[](1);
+        address[] memory _providers = new address[](2);
         _providers[0] = snowflakeAddress;
+        _providers[1] = address(this);
 
         uint _ein = identityRegistry.createIdentityDelegated(
-            associatedAddress, associatedAddress, _providers, new address[](0), v[0], r[0], s[0], timestamp
+            associatedAddress, associatedAddress, _providers, new address[](0), v, r, s, timestamp
         );
 
         // add snowmo resolver
-        snowflake.addResolverFor(
-            associatedAddress, snowMoResolverAddress, true, 0, abi.encode(associatedAddress, tokensReceivedAddress),
-            v[1], r[1], s[1], timestamp
+        snowflake.addResolverAsProvider(
+            _ein, snowMoResolverAddress, true, 0, abi.encode(associatedAddress, tokensReceivedAddress)
         );
 
         // get free testnet tokens

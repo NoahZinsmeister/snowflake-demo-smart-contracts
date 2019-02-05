@@ -26,6 +26,9 @@ interface SnowflakeInterface {
         uint8[2] calldata v, bytes32[2] calldata r, bytes32[2] calldata s, uint[2] calldata timestamp
     ) external;
     function addResolver(address resolver, bool isSnowflake, uint withdrawAllowance, bytes calldata extraData) external;
+    function addResolverAsProvider(
+        uint ein, address resolver, bool isSnowflake, uint withdrawAllowance, bytes calldata extraData
+    ) external;
     function addResolverFor(
         address approvingAddress, address resolver, bool isSnowflake, uint withdrawAllowance, bytes calldata extraData,
         uint8 v, bytes32 r, bytes32 s, uint timestamp
@@ -53,10 +56,4 @@ interface SnowflakeInterface {
         external;
     function withdrawSnowflakeBalanceFromVia(uint einFrom, address via, address to, uint amount, bytes calldata _bytes)
         external;
-
-    function allowAndCall(address destination, uint amount, bytes calldata data)
-        external returns (bytes memory returnData);
-    function allowAndCallDelegated(
-        address destination, uint amount, bytes calldata data, address approvingAddress, uint8 v, bytes32 r, bytes32 s
-    ) external returns (bytes memory returnData);
 }

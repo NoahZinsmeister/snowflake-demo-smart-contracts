@@ -1,4 +1,4 @@
-const gas = 2000000 // 650,000 gas limit
+const gas = 4000000 // 650,000 gas limit
 const gasPrice = 2000000000 // 2 gwei
 
 module.exports = {

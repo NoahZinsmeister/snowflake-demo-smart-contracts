@@ -24,7 +24,11 @@ module.exports = async function(deployer) {
   // deployer.link(StringUtils, OldClientRaindrop)
   // deployer.link(StringUtils, ClientRaindrop)
 
-  const uniswapVia = await deployer.deploy(UniswapVia, "0x223d9d7A9960a9d39f57D3AE37fa7080856f3C35", "0xf5D915570BC477f9B8D6C0E980aA81757A3AaC36")
-  const snowMoResolver = await deployer.deploy(SnowMoResolver, "0x223d9d7A9960a9d39f57D3AE37fa7080856f3C35", uniswapVia.address)
-  await deployer.deploy(DemoHelper, "0x223d9d7A9960a9d39f57D3AE37fa7080856f3C35", snowMoResolver.address)
+  await deployer.deploy(UniswapVia, "0xB0D5a36733886a4c5597849a05B315626aF5222E", "0xf5D915570BC477f9B8D6C0E980aA81757A3AaC36")
+    .then(uniswapVia => {
+      return deployer.deploy(SnowMoResolver, "0xB0D5a36733886a4c5597849a05B315626aF5222E", uniswapVia.address)
+        .then(snowMoResolver => {
+          return deployer.deploy(DemoHelper, "0xB0D5a36733886a4c5597849a05B315626aF5222E", snowMoResolver.address)
+        })
+    })
 }
